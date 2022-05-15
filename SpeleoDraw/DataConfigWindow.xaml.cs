@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -68,6 +69,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
             //fillDefaultControlList();
             fillPropertiesControlList();
             fillTxtList();
+            lba_cdrTemplateFile.Content = Properties.Settings.Default.cdrTemplateFile;
         }
 
         private void fillDefaultControlList()
@@ -277,9 +279,21 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
                  if (item.Name == "Azymuti")
                      Properties.Settings.Default.txt_azymuti = item.Value;
            }
+            Properties.Settings.Default.cdrTemplateFile = lba_cdrTemplateFile.Content.ToString();
            Properties.Settings.Default.Save();
            if (ApplyChanges != null)
                 ApplyChanges();
+        }
+
+        private void btn_cdrTemplateFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            of.Filter = ".cdr;.cdt|(CDR File)";
+            if((bool)of.ShowDialog())
+            {
+                lba_cdrTemplateFile.Content = of.FileName;
+                
+            }
         }
     }
 }

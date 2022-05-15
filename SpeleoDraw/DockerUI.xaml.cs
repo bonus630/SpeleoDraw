@@ -345,6 +345,11 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
         {
             this.currentDocIndex = 0;
             updateCave((sender as Data).cave);
+            if (corelApp.ActiveDocument == null)
+            {
+                corelApp.CreateDocument();
+                this.cave = (sender as Data).cave;
+            }
             this.cave.Generate3DPoints();
         }
 
@@ -534,7 +539,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
             cave.DrawVisada();
             this.Doc.EndCommandGroup();
             this.Doc.BeginCommandGroup("Grid");
-            Ret ret = cave.DrawGrid();
+            Rect ret = cave.DrawGrid();
 
             for (int i = 0; i < this.cave.BaseList.Count; i++)
             {
@@ -552,7 +557,8 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
         private void btn_showData_Click(object sender, RoutedEventArgs e)
         {
             Data data = new Data(this.cave);
-            IntPtr ownerWindowHandler = GetFocus();
+             IntPtr ownerWindowHandler = GetFocus();
+           // IntPtr ownerWindowHandler = new IntPtr(corelApp.ActiveWindow.);
             WindowInteropHelper helper = new WindowInteropHelper(data);
             helper.Owner = ownerWindowHandler;
             data.Closing += data_Closing;
@@ -669,15 +675,47 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
             dm.Load(out this.cave);
             this.currentDocIndex = 0;
             updateCave(this.cave);
+            string cdrTemplatePath = "";
+            if (corelApp.ActiveDocument == null && !string.IsNullOrEmpty(cdrTemplatePath))
+                corelApp.CreateDocumentFromTemplate(cdrTemplatePath, true);
+            corel.Shape caveNameShape = corelApp.ActiveDocument.SelectableShapes.FindShape("{Cave Name}");
+            if (caveNameShape != null && caveNameShape.Type == corel.cdrShapeType.cdrTextShape)
+                caveNameShape.Text.Story.Text = this.cave.CaveName;
+
+
             this.cave.Generate3DPoints();
+        }
+
+        private void btn_DrawSlice_Click(object sender, RoutedEventArgs e)
+        {
+            uint bSize = 14;
+            uint sSize = 6;
+            double mPoint = 2.5;
+            double x = 0 , y= 0, x1 = 0, y1= 0;
+            int shiftStat = 0;
+
+            corelApp.ActiveDocument.GetUserClick(out x, out y, out shiftStat,0, false, corel.cdrCursorShape.cdrCursorWinCross);
+            corelApp.ActiveDocument.GetUserClick(out x1, out y1, out shiftStat, 0, false, corel.cdrCursorShape.cdrCursorWinCross);
+
+            corel.Vector v = corelApp.Math.CreateVector(x, y);
+            corel.Vector v1 = corelApp.Math.CreateVector(x1, y1);
+            double angle = v.AngleBetween(v1);
+
+            //double h  = 
+
+        }
+
+        private void btn_decli_Click(object sender, RoutedEventArgs e)
+        {
+            lba_decli.Content = string.Format("{0} m", this.cave.CalculeDecli());
         }
     }
     //Eventos de click dos botões das camadas no gerenciador de camadas não são registrados ao mudar de documento
 
 
-    public struct Ret
+    public struct Rect
     {
-        public Ret(double left, double top, double rigth, double bottom)
+        public Rect(double left, double top, double rigth, double bottom)
         {
             this.Left = left;
             this.Top = top;

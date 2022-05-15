@@ -178,6 +178,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SpeleoThemesManager.cs" />
     <Compile Include="testeTool.cs" />
     <Compile Include="TextBoxMaskBehavior.cs" />
     <Compile Include="Visada.cs" />

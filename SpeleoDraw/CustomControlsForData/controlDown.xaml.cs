@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -21,7 +22,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw.CustomControlsForData
     /// </summary>
     public partial class controlDown : UserControl
     {
-        public string UserInputText { get { return this.txt_content.Text; } set { this.txt_content.Text = value; } }
+        public string UserInputText { get { return this.txt_content.Text.ToString(CultureInfo.InvariantCulture); } set { this.txt_content.Text = value; } }
         public Visibility SetVisible { set { this.Visibility = value; } }
         private ControlDownNumericType numericType;
         public controlDown(string label, string si,ControlDownNumericType numericType)
@@ -38,6 +39,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw.CustomControlsForData
         }
         private void checkTextFormat(object sender, TextCompositionEventArgs e)
         {
+            return;
             string pattern = "";
             if (this.numericType == ControlDownNumericType._Double)
                 pattern = @"^(-)?(\d+)?([\.|,]{1})?([\d]{0,2})?$";
@@ -58,11 +60,11 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw.CustomControlsForData
                 stop = (text.Contains(",") || text.Contains("."));
                 if (this.numericType == ControlDownNumericType._Int)
                     stop = true;
-                if (prevText == "." && !stop)
+                if (prevText == "," && !stop)
                 {
                
                     TextBox tb = sender as TextBox;
-                    tb.AppendText(",");
+                    tb.AppendText(".");
                     tb.CaretIndex = tb.Text.Length;
                     e.Handled = true;
                     return;

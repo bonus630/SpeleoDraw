@@ -456,6 +456,8 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
                     string[] cols = rows[i].Split("\t".ToCharArray(),StringSplitOptions.RemoveEmptyEntries);
                     BaseTopo _base = new BaseTopo();
                     _base.BaseName = cols[1];
+                    if (this.cave.BaseList.Count > 0)
+                        _base.IsStart = false;
                     BaseTopo refBase = this.cave.GetBaseForName(cols[0]);
                     if (refBase != null)
                         _base.RefBase = refBase;
@@ -463,34 +465,34 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
                     if (cols.Length < 9)
                         limit = cols.Length-2;
 
-                    for (int r = 0; r < limit-2; r++)
+                    for (int r = 0; r < limit; r++)
                     {
 
                         if (r == Properties.Settings.Default.txt_down)
                         {
                             _base.BottomSide = Double.Parse(cols[r+2]);
                         }
-                        if (i == Properties.Settings.Default.txt_up)
+                        if (r == Properties.Settings.Default.txt_up)
                         {
                             _base.TopSide = Double.Parse(cols[r+2]);
                         }
-                        if (i == Properties.Settings.Default.txt_left)
+                        if (r == Properties.Settings.Default.txt_left)
                         {
                             _base.LeftSide = Double.Parse(cols[r+2]);
                         }
-                        if (i == Properties.Settings.Default.txt_right)
+                        if (r == Properties.Settings.Default.txt_right)
                         {
                             _base.RightSide = Double.Parse(cols[r+2]);
                         }
-                        if (i == Properties.Settings.Default.txt_azymuti)
+                        if (r == Properties.Settings.Default.txt_azymuti)
                         {
                             _base.Azymuti = Int32.Parse(cols[r+2]);
                         }
-                        if (i == Properties.Settings.Default.txt_inclination)
+                        if (r == Properties.Settings.Default.txt_inclination)
                         {
                             _base.Incrination = Double.Parse(cols[r+2]);
                         }
-                        if (i == Properties.Settings.Default.txt_distance)
+                        if (r == Properties.Settings.Default.txt_distance)
                         {
                             _base.Distance = Double.Parse(cols[r+2]);
                         }

@@ -51,7 +51,7 @@
 
             </MenuItem>
             <MenuItem Header="Editar" Height="24" Width="83">
-                <MenuItem x:Name="btn_past" Header="Colar tabela do Excel" Command="{x:Static local:PastFromExcelCommand.PastFromExcel}" />
+                <MenuItem x:Name="btn_past" Header="Colar Dados CSV" Command="{x:Static local:PastFromExcelCommand.PastFromExcel}" />
 
 
             </MenuItem>

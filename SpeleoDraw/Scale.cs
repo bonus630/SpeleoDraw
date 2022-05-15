@@ -17,7 +17,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
         }
         public static int scale = 100;
 
-        public Ret DrawScale(double startX, double startY)
+        public Rect DrawScale(double startX, double startY)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
                 throw e;
             }
         }
-        public Ret DrawScale() 
+        public Rect DrawScale() 
         {
             List<double> pontos = new List<double>();
             while (this.size != 0)
@@ -140,7 +140,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
             
             DockerUI.corelApp.ActiveSelection.Group();
             DockerUI.corelApp.ActiveDocument.Unit = cdrUnit.cdrMillimeter;
-            return new Ret(x, y, w, h);
+            return new Rect(x, y, w, h);
         }
     }
 }

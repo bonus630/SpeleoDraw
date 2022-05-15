@@ -26,7 +26,9 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
         public event EventHandler CaveModify;
         public int AngleCorrection { get { return 0; } }
 
-
+        //public string Estate { get; set; }
+        //public string City { get; set; }
+        //public string Region { get; set; }
         public DateTime DateTopo { get { return this.dateTopo; } set { this.dateTopo = value; } }
         public List<BaseTopo> BaseList
         {
@@ -104,10 +106,11 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
             //cb_baseAnt.Items.Remove(this.baseTopo.BaseName);
             // btn_add_Click(null, null);
             //  this.baseTopo = null;
+            this.baseList[index] = baseTopo;
             if (BaseModify != null)
                 BaseModify(baseTopo, null);
             caveModify();
-            this.baseList[index] = baseTopo;
+            
         }
        public void RemoveBase(BaseTopo baseTopo)
        {
@@ -220,7 +223,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
             }
            // bases.Editable = false;
         }
-        public Ret DrawGrid()
+        public Rect DrawGrid()
         {
             Color blue = new Color();
             blue.CMYKAssign(100, 0, 0, 0);
@@ -444,6 +447,20 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
                 if (!baseT.IsStart)
                 {
                     i += baseT.Distance;
+                }
+            }
+            return i;
+        }
+
+        internal double CalculeDecli()
+        {
+            double i = 0;
+            foreach (BaseTopo baseT in baseList)
+            {
+
+                if (!baseT.IsStart)
+                {
+                    i += baseT.Distance * Math.Sin(baseT.Incrination);
                 }
             }
             return i;

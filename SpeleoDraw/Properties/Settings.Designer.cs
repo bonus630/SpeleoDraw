@@ -106,5 +106,17 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw.Properties {
                 this["txt_azymuti"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string cdrTemplateFile {
+            get {
+                return ((string)(this["cdrTemplateFile"]));
+            }
+            set {
+                this["cdrTemplateFile"] = value;
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:br.corp.bonus630.VSTA.SpeleoDraw"
              mc:Ignorable="d" 
-             MinWidth="256" Loaded="UserControl_Loaded">
+             Width="266" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -90,6 +90,12 @@
 
                     <Button Content="Calcular" Name="btn_cont" Margin="185,4,0,2" Height="24" Click="btn_cont_Click" />
                 </Grid>
+                <Grid Height="30">
+                    <Label Content="Desnível:" Margin="2,0,0,0" HorizontalAlignment="Left" Width="223"></Label>
+                    <Label Content="0 m" Name="lba_decli" Margin="85,0,0,0" HorizontalAlignment="Left" Width="95"></Label>
+
+                    <Button Content="Calcular" Name="btn_decli" Margin="185,4,0,2" Height="24" Click="btn_decli_Click" />
+                </Grid>
                 <Expander Header="Informações da Base" HorizontalAlignment="Left" Margin="0,16,0,0" VerticalAlignment="Top" MinWidth="225">
                     <ScrollViewer MaxHeight="320" MinWidth="225">
                         <StackPanel HorizontalAlignment="Left"  Margin="0,16,0,0" VerticalAlignment="Top" MinWidth="225" Orientation="Vertical">
@@ -116,7 +122,12 @@
 
 
                 </Expander>
+                <Expander Header="Desenhos" HorizontalAlignment="Left" Margin="0,16,0,0" VerticalAlignment="Top" MinWidth="225" IsExpanded="True" Name="Draws">
+                    <StackPanel>
+                        <Button x:Name="btn_DrawSlice" Content="Corte"  Click="btn_DrawSlice_Click"/>
+                    </StackPanel>
 
+                </Expander>
 
                 <!--<Grid Name="grid_socialMedia" MinWidth="225" Height="72" >
                     <Label Content="Visite e compartilhe:" Height="25" VerticalAlignment="Top"/>

@@ -6,6 +6,7 @@ using Corel.Interop.VGCore;
 using System.Runtime.Serialization;
 using System.Diagnostics;
 
+
 namespace br.corp.bonus630.VSTA.SpeleoDraw
 {
     [Serializable]
@@ -14,6 +15,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
         private double  incrination, distance,  leftSide, rightSide, topSide, bottomSide;
         [NonSerialized]
         private double xPosition, yPosition,zPosition, distanceScale,distance2D;
+       
         private string baseName; 
         private string comments = "";
         private bool isStart = true;
@@ -181,7 +183,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
 
                 
         }
-        public Ret DrawBasePerfil(double startX,double startY)
+        public Rect DrawBasePerfil(double startX,double startY)
         {
             string text = "Perfil Base";
             if (this.isStart)
@@ -219,7 +221,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
             //double x, y, w, h;
             //DockerUI.corelApp.ActiveSelection.GetPosition(out x,out y);
             //DockerUI.corelApp.ActiveSelection.GetSize(out w,out h);
-            Ret ret = new Ret(startX -l, startY+t, r + startX,  startY -b);
+            Rect ret = new Rect(startX -l, startY+t, r + startX,  startY -b);
             
             return ret;     
         }

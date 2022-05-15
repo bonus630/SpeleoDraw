@@ -16,7 +16,7 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
         private double xPosition = 0;
         private double yPosition = 0;
         private double bigExtension = 0;
-        private Ret gridArea = new Ret(0,0,0,0);
+        private Rect gridArea = new Rect(0,0,0,0);
 
         public double BigExtension { get { return this.bigExtension; } }
         public GridCave(Cave cave)
@@ -24,14 +24,14 @@ namespace br.corp.bonus630.VSTA.SpeleoDraw
             this.cave = cave;
         }
 
-        public Ret DrawGrid(double startX, double StartY)
+        public Rect DrawGrid(double startX, double StartY)
         {
             xSPosition = startX;
             ySPosition = StartY;
             return DrawGrid();
         }
         
-        public Ret DrawGrid()
+        public Rect DrawGrid()
         {
             foreach(BaseTopo baseTopo in this.cave.BaseList)
             {
